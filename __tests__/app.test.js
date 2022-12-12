@@ -3,6 +3,7 @@ const request = require("supertest");
 const db = require("../db/connection");
 const testData = require("../db/data/test-data/index.js");
 const seed = require("../db/seeds/seed.js");
+require("jest-sorted");
 
 beforeEach(() => seed(testData));
 afterAll(() => db.end());
@@ -54,6 +55,14 @@ describe("/api/reviews", () => {
             comment_count: expect.any(String),
           });
         });
+      });
+  });
+  test("200 : Should order by descending as a default", () => {
+    return request(app)
+      .get("/api/reviews?order=desc")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.reviews).toBeSortedBy("created_at", { descending: true });
       });
   });
 });
