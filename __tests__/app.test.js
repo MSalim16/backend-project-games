@@ -3,7 +3,6 @@ const request = require("supertest");
 const db = require("../db/connection");
 const testData = require("../db/data/test-data/index.js");
 const seed = require("../db/seeds/seed.js");
-require("jest-sorted");
 
 beforeEach(() => seed(testData));
 afterAll(() => db.end());
@@ -42,7 +41,6 @@ describe("/api/reviews", () => {
       .then(({ body: { reviews } }) => {
         expect(reviews.length).toEqual(13);
         reviews.forEach((review) => {
-          expect(review).toHaveProperty("comment_count");
           expect(review).toMatchObject({
             title: expect.any(String),
             designer: expect.any(String),
@@ -51,6 +49,9 @@ describe("/api/reviews", () => {
             review_body: expect.any(String),
             category: expect.any(String),
             votes: expect.any(Number),
+            created_at: expect.any(String),
+            review_id: expect.any(Number),
+            comment_count: expect.any(String),
           });
         });
       });
