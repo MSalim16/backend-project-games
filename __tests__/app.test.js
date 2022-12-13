@@ -59,12 +59,12 @@ describe("/api/reviews", () => {
 
 describe('"/api/reviews/:reviews_id', () => {
   describe("GET", () => {
-    test("200: returns an object containing information on requested review (with comment count)", () => {
+    test("200: returns an object containing information on requested review ", () => {
       return request(app)
         .get("/api/reviews/3")
         .expect(200)
         .then(({ body }) => {
-          expect(body.review).toEqual({
+          expect(body.review).toMatchObject({
             review_id: 3,
             title: "Ultimate Werewolf",
             designer: "Akihisa Okui",
@@ -75,7 +75,6 @@ describe('"/api/reviews/:reviews_id', () => {
             category: "social deduction",
             created_at: "2021-01-18T10:01:41.251Z",
             votes: 5,
-            comment_count: "3",
           });
         });
     });
@@ -86,8 +85,7 @@ describe('"/api/reviews/:reviews_id', () => {
       .get("/api/reviews/99999")
       .expect(404)
       .then(({ body }) => {
-        console.log(body);
-        expect(body.message).toBe("Review ID does not exist");
+        expect(body.msg).toBe("Review ID does not exist");
       });
   });
 
@@ -96,7 +94,7 @@ describe('"/api/reviews/:reviews_id', () => {
       .get("/api/reviews/bananas")
       .expect(400)
       .then(({ body }) => {
-        expect(body.message).toBe("Invalid datatype found");
+        expect(body.msg).toBe("Invalid datatype found");
       });
   });
 });
