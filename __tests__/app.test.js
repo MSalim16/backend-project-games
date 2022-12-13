@@ -108,3 +108,57 @@ describe('"/api/reviews/:reviews_id', () => {
       });
   });
 });
+describe("GET /api/reviews/:review_id/comments", () => {
+  test("200: responds with array of comments related to given review_id sorted by most recent first", () => {
+    return request(app)
+      .get("/api/reviews/3/comments")
+      .expect(200)
+      .then(({ body }) => {
+        const { comments } = body;
+        expect(comments).toBeInstanceOf(Array);
+        expect(comments).toHaveLength(3);
+        expect(comments).toBeSortedBy("created_at", {
+          descending: false,
+          coerce: true,
+        });
+        comments.forEach((comment) => {
+          expect(comment).toEqual(
+            expect.objectContaining({
+              comment_id: expect.any(Number),
+              votes: expect.any(Number),
+              created_at: expect.any(String),
+              author: expect.any(String),
+              body: expect.any(String),
+              review_id: 3,
+            })
+          );
+        });
+      });
+  });
+  test("200: responds with an empty array when review_id has no related comments and message", () => {
+    return request(app)
+      .get("/api/reviews/1/comments")
+      .expect(200)
+      .then(({ body }) => {
+        const { comments } = body;
+        expect(comments).toBeInstanceOf(Array);
+        expect(comments).toHaveLength(0);
+      });
+  });
+  test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
+    return request(app)
+      .get("/api/reviews/9999/comments")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Review ID does not exist");
+      });
+  });
+  test("400: responds with correct error status when invalid datatype used", () => {
+    return request(app)
+      .get("/api/reviews/banana/comments")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+});

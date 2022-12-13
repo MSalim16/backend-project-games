@@ -27,3 +27,14 @@ exports.fetchReviewByID = (id) => {
       return rows[0];
     });
 };
+
+exports.selectCommentsById = (id) => {
+  return db
+    .query(
+      `SELECT * FROM comments WHERE review_id = $1 ORDER BY created_at ASC`,
+      [id]
+    )
+    .then(({ rows }) => {
+      return rows;
+    });
+};
