@@ -66,3 +66,45 @@ describe("/api/reviews", () => {
       });
   });
 });
+
+describe('"/api/reviews/:reviews_id', () => {
+  describe("GET", () => {
+    test("200: returns an object containing information on requested review ", () => {
+      return request(app)
+        .get("/api/reviews/3")
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.review).toMatchObject({
+            review_id: 3,
+            title: "Ultimate Werewolf",
+            designer: "Akihisa Okui",
+            owner: "bainesface",
+            review_img_url:
+              "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+            review_body: "We couldn't find the werewolf!",
+            category: "social deduction",
+            created_at: "2021-01-18T10:01:41.251Z",
+            votes: 5,
+          });
+        });
+    });
+  });
+
+  test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
+    return request(app)
+      .get("/api/reviews/99999")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Review ID does not exist");
+      });
+  });
+
+  test("400: returns an error message when passed an invalid data type", () => {
+    return request(app)
+      .get("/api/reviews/bananas")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+});
