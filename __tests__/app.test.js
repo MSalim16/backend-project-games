@@ -115,14 +115,13 @@ describe("GET /api/reviews/:review_id/comments", () => {
       .expect(200)
       .then(({ body }) => {
         const { comments } = body;
-        expect(comments).toBeInstanceOf(Array);
         expect(comments).toHaveLength(3);
         expect(comments).toBeSortedBy("created_at", {
           descending: false,
           coerce: true,
         });
         comments.forEach((comment) => {
-          expect(comment).toEqual(
+          expect(comment).toMatchObject(
             expect.objectContaining({
               comment_id: expect.any(Number),
               votes: expect.any(Number),
