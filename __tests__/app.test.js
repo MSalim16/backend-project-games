@@ -3,6 +3,7 @@ const request = require("supertest");
 const db = require("../db/connection");
 const testData = require("../db/data/test-data/index.js");
 const seed = require("../db/seeds/seed.js");
+const users = require("../db/data/test-data/users");
 require("jest-sorted");
 
 beforeEach(() => seed(testData));
@@ -209,7 +210,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
       .send(newComment)
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toEqual("Not Found");
+        expect(body.msg).toEqual("Review ID does not exist");
       });
   });
   test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
@@ -219,7 +220,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
       .send(newComment)
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toBe("Not Found");
+        expect(body.msg).toBe("Review ID does not exist");
       });
   });
   test("400: responds with correct error status when invalid datatype used", () => {
@@ -227,6 +228,109 @@ describe("POST /api/reviews/:review_id/comments", () => {
     return request(app)
       .post("/api/reviews/test/comments")
       .send(newComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+  test("201: responds with the posted comment and ignores addiotnal properties in the comment", () => {
+    const newComment = {
+      username: "mallionaire",
+      body: "I love this game!",
+      email: "Johnparker123@gmail.com",
+      city: "Manchester",
+    };
+    return request(app)
+      .post("/api/reviews/4/comments")
+      .send(newComment)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toMatchObject(
+          expect.objectContaining({
+            comment_id: 7,
+            body: "I love this game!",
+            votes: 0,
+            author: "mallionaire",
+            review_id: 4,
+            created_at: expect.any(String),
+          })
+        );
+      });
+  });
+});
+
+describe("PATCH /api/reviews/review_id", () => {
+  test("200: respond with review object with votes property correctly incremented", () => {
+    const votes = { inc_votes: 1 };
+    return request(app)
+      .patch("/api/reviews/4")
+      .send(votes)
+      .expect(200)
+      .then(({ body }) => {
+        const { review } = body;
+        expect(review).toEqual({
+          review_id: 4,
+          title: "Dolor reprehenderit",
+          designer: "Gamey McGameface",
+          owner: "mallionaire",
+          review_img_url:
+            "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          review_body:
+            "Consequat velit occaecat voluptate do. Dolor pariatur fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat et adipisicing laborum do. Sint sit tempor officia pariatur duis ullamco labore ipsum nisi voluptate nulla eu veniam. Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip. Cillum aliquip quis aute enim anim ex laborum officia. Aliqua magna elit reprehenderit Lorem elit non laboris irure qui aliquip ad proident. Qui enim mollit Lorem labore eiusmod",
+          category: "social deduction",
+          created_at: "2021-01-22T11:35:50.936Z",
+          votes: 8,
+        });
+      });
+  });
+  test("200: respond with review object with votes property correctly incremented - going into negatives", () => {
+    const votes = { inc_votes: -100 };
+    return request(app)
+      .patch("/api/reviews/6")
+      .send(votes)
+      .expect(200)
+      .then(({ body }) => {
+        const { review } = body;
+        expect(review).toEqual({
+          review_id: 6,
+          title: "Occaecat consequat officia in quis commodo.",
+          designer: "Ollie Tabooger",
+          owner: "mallionaire",
+          review_img_url:
+            "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          review_body:
+            "Fugiat fugiat enim officia laborum quis. Aliquip laboris non nulla nostrud magna exercitation in ullamco aute laborum cillum nisi sint. Culpa excepteur aute cillum minim magna fugiat culpa adipisicing eiusmod laborum ipsum fugiat quis. Mollit consectetur amet sunt ex amet tempor magna consequat dolore cillum adipisicing. Proident est sunt amet ipsum magna proident fugiat deserunt mollit officia magna ea pariatur. Ullamco proident in nostrud pariatur. Minim consequat pariatur id pariatur adipisicing.",
+          category: "social deduction",
+          created_at: "2020-09-13T14:19:28.077Z",
+          votes: -92,
+        });
+      });
+  });
+  test("400: returns an error message when passed an invalid data type", () => {
+    const votes = { inc_votes: "banana" };
+    return request(app)
+      .patch("/api/reviews/5")
+      .send(votes)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+  test("404: returns an error message when when passed correct data type but a review_id that does not exist", () => {
+    const votes = { inc_votes: 10 };
+    return request(app)
+      .patch("/api/reviews/10000")
+      .send(votes)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Review ID does not exist");
+      });
+  });
+  test("400: return an error message when inc-votes is missing", () => {
+    const votes = { inc_votes: {} };
+    return request(app)
+      .patch("/api/reviews/5")
+      .send(votes)
       .expect(400)
       .then(({ body }) => {
         expect(body.msg).toBe("Invalid datatype found");
