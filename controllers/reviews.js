@@ -11,9 +11,6 @@ exports.getReviews = (req, res, next) => {
     .then((reviews) => {
       res.status(200).send({ reviews });
     })
-    .catch((err) => {
-      next(err);
-    });
 };
 
 exports.getReviewById = (req, res, next) => {
