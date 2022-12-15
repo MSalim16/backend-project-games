@@ -337,20 +337,3 @@ describe("PATCH /api/reviews/review_id", () => {
       });
   });
 });
-describe("/api/users", () => {
-  test("GET - STATUS: 200, responds with an array of the newly inserted user objects", () => {
-    return request(app)
-      .get("/api/users")
-      .expect(200)
-      .then(({ body: { user } }) => {
-        expect(users).toHaveLength(4);
-        users.forEach((user) => {
-          expect(user).toMatchObject({
-            username: expect.any(String),
-            name: expect.any(String),
-            avatar_url: expect.any(String),
-          });
-        });
-      });
-  });
-});
