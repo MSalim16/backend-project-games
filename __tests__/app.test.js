@@ -161,3 +161,75 @@ describe("GET /api/reviews/:review_id/comments", () => {
       });
   });
 });
+
+describe("POST /api/reviews/:review_id/comments", () => {
+  test("201: responds with the posted comment", () => {
+    const newComment = { username: "mallionaire", body: "I love this game!" };
+    return request(app)
+      .post("/api/reviews/4/comments")
+      .send(newComment)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toMatchObject(
+          expect.objectContaining({
+            comment_id: 7,
+            body: "I love this game!",
+            votes: 0,
+            author: "mallionaire",
+            review_id: 4,
+            created_at: expect.any(String),
+          })
+        );
+      });
+  });
+  test("400: responds with error message when username is not given", () => {
+    const newComment = { body: "banana" };
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send(newComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toEqual("Username required");
+      });
+  });
+  test("400: responds with error message when body is not given", () => {
+    const newComment = { username: "banana" };
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send(newComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toEqual("Body required");
+      });
+  });
+  test("400: responds with error message when username does not exist", () => {
+    const newComment = { username: "banana", body: "test12345" };
+    return request(app)
+      .post("/api/reviews/5/comments")
+      .send(newComment)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toEqual("Not Found");
+      });
+  });
+  test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
+    const newComment = { username: "mallionaire", body: "I love this game!" };
+    return request(app)
+      .post("/api/reviews/123456789/comments")
+      .send(newComment)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Not Found");
+      });
+  });
+  test("400: responds with correct error status when invalid datatype used", () => {
+    const newComment = { username: "mallionaire", body: "I love this game !" };
+    return request(app)
+      .post("/api/reviews/test/comments")
+      .send(newComment)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+});
