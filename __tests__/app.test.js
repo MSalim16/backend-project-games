@@ -3,7 +3,6 @@ const request = require("supertest");
 const db = require("../db/connection");
 const testData = require("../db/data/test-data/index.js");
 const seed = require("../db/seeds/seed.js");
-const users = require("../db/data/test-data/users");
 require("jest-sorted");
 
 beforeEach(() => seed(testData));
@@ -41,7 +40,7 @@ describe("/api/reviews", () => {
       .get("/api/reviews")
       .expect(200)
       .then(({ body: { reviews } }) => {
-        expect(reviews.length).toEqual(13);
+        expect(reviews.length).toBe(13);
         reviews.forEach((review) => {
           expect(review).toMatchObject({
             title: expect.any(String),
@@ -190,7 +189,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
       .send(newComment)
       .expect(400)
       .then(({ body }) => {
-        expect(body.msg).toEqual("Username required");
+        expect(body.msg).toBe("Username required");
       });
   });
   test("400: responds with error message when body is not given", () => {
@@ -200,7 +199,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
       .send(newComment)
       .expect(400)
       .then(({ body }) => {
-        expect(body.msg).toEqual("Body required");
+        expect(body.msg).toBe("Body required");
       });
   });
   test("400: responds with error message when username does not exist", () => {
@@ -210,7 +209,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
       .send(newComment)
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toEqual("Review ID does not exist");
+        expect(body.msg).toBe("Review ID does not exist");
       });
   });
   test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
@@ -259,6 +258,7 @@ describe("POST /api/reviews/:review_id/comments", () => {
   });
 });
 
+const users = require("../db/data/test-data/users");
 describe("PATCH /api/reviews/review_id", () => {
   test("200: respond with review object with votes property correctly incremented", () => {
     const votes = { inc_votes: 1 };
@@ -268,7 +268,7 @@ describe("PATCH /api/reviews/review_id", () => {
       .expect(200)
       .then(({ body }) => {
         const { review } = body;
-        expect(review).toEqual({
+        expect(review).toMatchObject({
           review_id: 4,
           title: "Dolor reprehenderit",
           designer: "Gamey McGameface",
@@ -283,6 +283,16 @@ describe("PATCH /api/reviews/review_id", () => {
         });
       });
   });
+
+  test("404: responds with correct error status when invalid review_id is used", () => {
+    return request(app)
+      .get("/api/reviews/66")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Review ID does not exist");
+      });
+  });
+
   test("200: respond with review object with votes property correctly incremented - going into negatives", () => {
     const votes = { inc_votes: -100 };
     return request(app)
@@ -334,6 +344,31 @@ describe("PATCH /api/reviews/review_id", () => {
       .expect(400)
       .then(({ body }) => {
         expect(body.msg).toBe("Invalid datatype found");
+      });
+  });
+});
+describe("/api/users", () => {
+  test("GET - STATUS: 200, responds with an array of the newly inserted user objects", () => {
+    return request(app)
+      .get("/api/users")
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(users).toHaveLength(4);
+        users.forEach((user) => {
+          expect(user).toMatchObject({
+            username: expect.any(String),
+            name: expect.any(String),
+            avatar_url: expect.any(String),
+          });
+        });
+      });
+  });
+  test("404: responds with correct error status when invalid path has been used", () => {
+    return request(app)
+      .get("/api/userusersss")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid Path");
       });
   });
 });
