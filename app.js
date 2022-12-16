@@ -9,6 +9,7 @@ const {
 } = require("./controllers/reviews");
 const { deleteCommentById } = require("./controllers/comments");
 const { getUsers } = require("./controllers/users");
+const { getAPI } = require("./controllers/api_endpoints");
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.patch("/api/reviews/:review_id", patchReviewById);
 app.get("/api/users", getUsers);
 
 app.delete("/api/comments/:comment_id", deleteCommentById);
+
+app.get("/api", getAPI);
 
 app.all("/*", (req, res, next) => {
   res.status(404).send({ msg: "Invalid Path" });
