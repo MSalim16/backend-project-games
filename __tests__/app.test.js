@@ -224,7 +224,7 @@ describe("GET /api/reviews/:review_id/comments", () => {
   });
   test("200: responds with an empty array when review_id has no related comments and message", () => {
     return request(app)
-      .get("/api/reviews/1/comments")
+      .get("/api/reviews/6/comments")
       .expect(200)
       .then(({ body }) => {
         const { comments } = body;
@@ -234,7 +234,7 @@ describe("GET /api/reviews/:review_id/comments", () => {
   });
   test("404: returns an error message when passed correct data type but a review_id that does not exist", () => {
     return request(app)
-      .get("/api/reviews/9999/comments")
+      .get("/api/reviews/765564/comments")
       .expect(404)
       .then(({ body }) => {
         expect(body.msg).toBe("Review ID does not exist");
@@ -242,7 +242,7 @@ describe("GET /api/reviews/:review_id/comments", () => {
   });
   test("400: responds with correct error status when invalid datatype used", () => {
     return request(app)
-      .get("/api/reviews/banana/comments")
+      .get("/api/reviews/bananaaaa/comments")
       .expect(400)
       .then(({ body }) => {
         expect(body.msg).toBe("Invalid datatype found");
