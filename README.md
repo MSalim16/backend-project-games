@@ -1,57 +1,110 @@
-# Northcoders House of Games API
+# Mohamed Salim's Games API
 
-## Background
+## Link for Hosted Version of my API:
 
-We will be building an API for the purpose of accessing application data programmatically. The intention here is to mimic the building of a real world backend service (such as reddit) which should provide this information to the front end architecture.
+https://mohamed-salims-games-api.onrender.com
 
-Your database will be PSQL, and you will interact with it using [node-postgres](https://node-postgres.com/).
+---
 
-## Kanban
+## Summary of project
 
-### Link to your Trello Board here: https://trello.com/b/gBtX4GN3/be-nc-games
+With the use of express-defined request pathways, this project builds the back end for a database of video game reviews.
 
-To keep track of the tasks involved in this project we're going to use a kanban board. Ensure that you work on one _ticket_ at time. You can click on the ticket to find out more information about what is required for the feature. A ticket is not considered complete unless both the happy path and errors response are handled. You can make use of the checklist on each ticket to keep track of the errors you want to handle. You can also make use of [error-handling.md](error-handling.md) to consider the error codes we may wish to respond with.
+For instance, you might issue a GET request to /api/reviews if you wanted to read all of the reviews that are presently stored in the database.
 
-**Please ensure you work through the tickets in numerical order.**
+There are already-existing users, categories, and comment data, which further extends the usefulness and integration of all the data. Although each of these is included in its own table, a relational database links the data by using keys that cross each other.
 
-## Git Branching and Pull Requests
+---
 
-You will be working on each ticket on a new **branch**.
+## How to clone my repository
 
-To create and switch to a new git branch use the command:
+1 - clone the repository down locally using this command in your terminal:
 
-```
-git checkout -b <new branch name>
-```
-
-This will create a branch and move over to that branch. (Omit the `-b` flag if you wish to switch to an already existing branch).
-
-We recommend that you name the branch after the number assigned to each ticket via the header. eg. `ncnews-1`
-
-When pushing the branch to git hub ensure that you make reference to the branch you are pushing to on the remote.
-
-```
-git push origin <branch name>
+```git
+git clone https://github.com/MSalim16/backend-project-games
 ```
 
-From github you can make a pull request and share the link and ticket number via a pull request specific nchelp using the command `nchelp pr`. A tutor will swing by to review your code. Ensure that you keep your trello up to date whilst you await the PR approval. Regular `nchelp` will be available for when you need support.
-
-Once a pull request been accepted be sure to switch back to the main branch and pull down the updated changes.
+2 - open it up on VSCode using the terminal command:
 
 ```
-git checkout main
-
-git pull origin main
+code .
 ```
 
-You can tidy up your local branches once they have been pull into main by deleting them:
+3 - install the required dependencies using in the terminal:
+
+```bash
+npm install dotenv
+```
+
+```bash
+npm install pg
+```
+
+```bash
+npm install express
+```
+
+```bash
+npm install -D jest
+```
+
+```bash
+npm install -D jest-sorted
+```
+
+```bash
+npm install -D supertest
+```
+
+4 - create these 2 files in the repository and fill them in with the corresponding data as shown below:
+
+```git
+
+'.env.test'
+
+for the test fle you will have to enter this code into the file for it to function correctly : PGDATABASE = nc_games;
+
+.env.development'
+
+for the development file you will require this code for it to function correctly: PGDATABASE = nc_games;
+
 
 ```
-git branch -D <local branch>
+
+---
+
+## Minimum Versions of Node and Postgres required to run this Project.
+
+Node:v19.0.0
+
+Postgres:v12.12
+
+---
+
+## Scripts
+
+You will then need to run through several scripts in order to really allow the code to run:
+
+1. Run this command in your code editor terminal to build the database on your computer.
+
+```bash
+node run setup-dbs
 ```
 
-## Husky
+2. With the following command, stated databases may now be seeded.
 
-To ensure we are not commiting broken code this project makes use of git hooks. Git hooks are scripts triggered during certain events in the git lifecycle. Husky is a popular package which allows us to set up and maintain these scripts. This project makes use a _pre-commit hook_. When we attempt to commit our work, the script defined in the `pre-commit` file will run. If any of our tests fail than the commit will be aborted.
+```bash
+node run seed
+```
 
-The [Husky documentation](https://typicode.github.io/husky/#/) explains how to configure Husky for your own project as well as creating your own custom hooks.\_
+3. However, for the tests, this is noted in the test files' headers as something that must be done before each test.
+
+4. Now, I recommend executing this in your terminal to check to verify whether everything is configured correctly.
+
+```bash
+npm test
+```
+
+If you have followed all of the instructions above all tests should pass.
+
+---
