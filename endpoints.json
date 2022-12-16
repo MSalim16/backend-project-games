@@ -1,0 +1,128 @@
+{
+  "GET /api": {
+    "description": "outputs up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/categories": {
+    "description": "outputs an array of all categories",
+    "exampleResponse": {
+      "categories": [
+        {
+          "description": "Players attempt to uncover each other's hidden role",
+          "slug": "Social deduction"
+        }
+      ]
+    }
+  },
+  "GET /api/users": {
+    "description": "outputs an array of all users",
+    "exampleResponse": {
+      "users": [
+        {
+          "username": "mallionaire",
+          "name": "haz",
+          "avatar_url": "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg"
+        }
+      ]
+    }
+  },
+  "DELETE /api/comments/:comment_id": {
+    "description": "deletes comment at requested comment ID returning just status 204",
+    "exampleResponse": {}
+  },
+  "GET /api/reviews": {
+    "description": "serves an array of all reviews",
+    "queries": {
+      "category": "an preexisting category to narrow the results",
+      "sort_by": "a sorting column name. dates by default",
+      "order": "if it is in descending or ascending order. descends by default"
+    },
+    "exampleResponse": {
+      "reviews": [
+        {
+          "title": "One Night Ultimate Werewolf",
+          "designer": "Akihisa Okui",
+          "owner": "happyamy2016",
+          "review_img_url": "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "category": "hidden-roles",
+          "created_at": 1610964101251,
+          "votes": 5,
+          "comment_count": 1
+        }
+      ]
+    }
+  },
+  "GET /api/reviews/:review_id": {
+    "description": "provides only one review with the specified review id.",
+    "exampleResponse": {
+      "review": [
+        {
+          "title": "Agricola",
+          "designer": "Uwe Rosenberg",
+          "owner": "mallionaire",
+          "review_img_url": "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+          "review_body": "Farmyard fun!",
+          "category": "euro game",
+          "created_at": 1610964020514,
+          "votes": 1,
+          "comment_count": 1
+        }
+      ]
+    }
+  },
+  "PATCH /api/reviews/:review_id": {
+    "description": "changes just one review with the specified review id.",
+    "request body guide": {
+      "format": "object in the form { inc_votes: newVote }.",
+      "examples": "{ inc_votes : 1 } would increase the current review's vote by 1. { inc_votes : -100 } would decrease the current review's vote by 100"
+    },
+    "exampleResponse": {
+      "updatedReview": [
+        {
+          "title": "Agricola",
+          "designer": "Uwe Rosenberg",
+          "owner": "mallionaire",
+          "review_img_url": "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+          "review_body": "Farmyard fun!",
+          "category": "euro game",
+          "created_at": 1610964020514,
+          "votes": 99,
+          "comment_count": 1
+        }
+      ]
+    }
+  },
+  "GET /api/reviews/:review_id/comments": {
+    "description": "provides an array of objects for each comment associated with the specified review id.",
+    "exampleResponse": {
+      "comments": [
+        {
+          "comment_id": 1,
+          "votes": 16,
+          "created_at": 1511354613389,
+          "author": "bainesface",
+          "body": "I loved this game too!",
+          "review_id": 2
+        }
+      ]
+    }
+  },
+  "POST /api/reviews/:review_id/comments": {
+    "description": "provides an array of objects for each comment associated with the specified review id.",
+    "request body guide": {
+      "format": "an object in the form { username: string, body: string }.",
+      "examples": "{ username: 'philippaclaire9', body: 'This is a brand new comment for review ID 3' }"
+    },
+    "exampleResponse": {
+      "newComment": [
+        {
+          "comment_id": 35,
+          "votes": 12,
+          "created_at": 1511354613389,
+          "author": "philippaclaire9",
+          "body": "This is a brand new comment for review ID 3",
+          "review_id": 3
+        }
+      ]
+    }
+  }
+}
