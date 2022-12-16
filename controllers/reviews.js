@@ -7,9 +7,12 @@ const {
 } = require("../models/reviews.js");
 
 exports.getReviews = (req, res, next) => {
-  selectReviews()
+  const { category, sort_by, order } = req.query;
+
+  const promises = [selectReviews(category, sort_by, order)];
+  Promise.all(promises)
     .then((reviews) => {
-      res.status(200).send({ reviews });
+      res.status(200).send({ reviews: reviews[0] });
     })
     .catch((err) => {
       next(err);

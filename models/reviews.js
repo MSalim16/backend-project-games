@@ -1,20 +1,72 @@
 const db = require("../db/connection");
 
-exports.selectReviews = () => {
-  let reviewsQueryStr = `
-    SELECT reviews.*, COUNT(comments.review_id) AS comment_count
-    FROM reviews
-    LEFT JOIN comments
-    ON comments.review_id = reviews.review_id
-    GROUP BY reviews.review_id 
-    ORDER BY created_at desc `;
+exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
+  const validSort_byQueries = [
+    "review_id",
+    "title",
+    "review_body",
+    "designer",
+    "review_img_url",
+    "votes",
+    "category",
+    "owner",
+    "created_at",
+    "comment_count",
+  ];
+  const validOrderQueries = ["ASC", "DESC"];
 
-  return db.query(reviewsQueryStr).then((results) => {
-    return results.rows;
-  });
+  if (
+    !validSort_byQueries.includes(sort_by.toLowerCase()) &&
+    sort_by !== undefined
+  ) {
+    return Promise.reject({
+      status: 400,
+      msg: "Sort_by value does not exist",
+    });
+  }
+  if (!validOrderQueries.includes(order.toUpperCase()) && order !== undefined) {
+    return Promise.reject({
+      status: 400,
+      msg: "Order does not exist - use asc or desc",
+    });
+  }
+  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id`;
+
+  let queryVal = [];
+  const validCategories = [
+    "euro game",
+    "strategy",
+    "hidden-roles",
+    "dexterity",
+    "push-your-luck",
+    "roll-and-write",
+    "deck-building",
+    "engine-building",
+    "children's games",
+  ];
+
+  if (category) {
+    if (!validCategories.includes(category)) {
+      return Promise.reject({
+        status: 404,
+        msg: `${category} not found`,
+      });
+    } else {
+      formatStr += ` WHERE category = $1`;
+      queryVal.push(category);
+    }
+  }
+  formatStr += ` GROUP BY reviews.review_id ORDER BY ${sort_by.toLowerCase()} ${order.toUpperCase()}`;
+
+  return db
+    .query(formatStr, queryVal)
+
+    .then((results) => {
+      return results.rows;
+    });
 };
 
-exports.fetchReviewByID = async (id) => {
+exports.fetchReviewByID = (id) => {
   return db
     .query("SELECT * FROM reviews WHERE review_id = $1", [id])
     .then(({ rows }) => {
