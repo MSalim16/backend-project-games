@@ -14,7 +14,7 @@ exports.selectReviews = () => {
   });
 };
 
-exports.fetchReviewByID = (id) => {
+exports.fetchReviewByID = async (id) => {
   return db
     .query("SELECT * FROM reviews WHERE review_id = $1", [id])
     .then(({ rows }) => {
