@@ -30,7 +30,8 @@ exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
       msg: "Order does not exist - use asc or desc",
     });
   }
-  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id`;
+  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id ,
+  JOIN users WHERE owner = users.username`;
 
   let queryVal = [];
   const validCategories = [
@@ -61,12 +62,12 @@ exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
   return db
     .query(formatStr, queryVal)
 
-    .then((results) => {
+    .then(results => {
       return results.rows;
     });
 };
 
-exports.fetchReviewByID = (id) => {
+exports.fetchReviewByID = id => {
   return db
     .query(
       "SELECT reviews.*, COUNT (comment_id) AS comment_count FROM reviews LEFT JOIN comments ON reviews.review_id = comments.review_id WHERE reviews.review_id = $1 GROUP BY reviews.review_id;",
@@ -83,7 +84,7 @@ exports.fetchReviewByID = (id) => {
     });
 };
 
-exports.selectCommentsById = (id) => {
+exports.selectCommentsById = id => {
   return db
     .query(
       `SELECT * FROM comments WHERE review_id = $1 ORDER BY created_at ASC`,
