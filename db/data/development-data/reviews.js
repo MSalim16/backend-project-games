@@ -3,6 +3,8 @@ module.exports = [
     title: "Culture a Love of Agriculture With Agricola",
     designer: "Uwe Rosenberg",
     owner: "tickle122",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
     review_img_url:
       "https://images.pexels.com/photos/4917821/pexels-photo-4917821.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -15,6 +17,8 @@ module.exports = [
     title: "JengARRGGGH!",
     designer: "Leslie Scott",
     owner: "grumpy19",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
     review_img_url:
       "https://images.pexels.com/photos/4009761/pexels-photo-4009761.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
     review_body:
@@ -27,6 +31,8 @@ module.exports = [
     title: "Karma Karma Chameleon",
     designer: "Rikki Tahta",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -39,6 +45,8 @@ module.exports = [
     title: "One Night Ultimate Werewolf",
     designer: "Akihisa Okui",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body: "We couldn't find the werewolf!",
@@ -50,6 +58,8 @@ module.exports = [
     title: "A truly Quacking Game; Quacks of Quedlinburg",
     designer: "Wolfgang Warsch",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -62,6 +72,8 @@ module.exports = [
     title: "Build you own tour de Yorkshire",
     designer: "Asger Harding Granerud",
     owner: "cooljmessy",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/1/1a/MR_MESSY_4A.jpg/revision/latest/scale-to-width-down/250?cb=20170730171002",
     review_img_url:
       "https://images.pexels.com/photos/258045/pexels-photo-258045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -74,6 +86,8 @@ module.exports = [
     title: "That's just what an evil person would say!",
     designer: "Fiona Lohoar",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -86,6 +100,8 @@ module.exports = [
     title: "Scythe; you're gonna need a bigger table!",
     designer: "Jamey Stegmaier",
     owner: "grumpy19",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -98,6 +114,8 @@ module.exports = [
     title: "Settlers of Catan: Don't Settle For Less",
     designer: "Klaus Teuber",
     owner: "tickle122",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -110,6 +128,8 @@ module.exports = [
     title: "Super Rhino Hero",
     designer: "Gamey McGameface",
     owner: "jessjelly",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
     review_img_url:
       "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -122,6 +142,8 @@ module.exports = [
     title: "Proident tempor et.",
     designer: "Seymour Buttz",
     owner: "grumpy19",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -134,6 +156,8 @@ module.exports = [
     title: "Occaecat consequat officia in quis commodo.",
     designer: "Ollie Tabooger",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -146,6 +170,8 @@ module.exports = [
     title: "Kerplunk; Don't lose your marbles",
     designer: "Avery Wunzboogerz",
     owner: "tickle122",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
     review_img_url:
       "https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -158,6 +184,8 @@ module.exports = [
     title: "Velit tempor ullamco amet ipsum dolor voluptate.",
     designer: "Don Keigh",
     owner: "cooljmessy",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/1/1a/MR_MESSY_4A.jpg/revision/latest/scale-to-width-down/250?cb=20170730171002",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -170,6 +198,8 @@ module.exports = [
     title: "Scrobble, no that's not a typo",
     designer: "Word Smith",
     owner: "jessjelly",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
     review_img_url:
       "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -182,6 +212,8 @@ module.exports = [
     title: "Ticket To Ride",
     designer: "Alan R. Moon",
     owner: "weegembump",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/7e/MrMen-Bump.png/revision/latest?cb=20180123225553",
     review_img_url:
       "https://images.pexels.com/photos/4691567/pexels-photo-4691567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -194,6 +226,8 @@ module.exports = [
     title: "Nova Luna; Freak out in a moonage daydream, oh yeah!",
     designer: "Uwe Rosenburg",
     owner: "tickle122",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -206,6 +240,8 @@ module.exports = [
     title: "Reef",
     designer: "Emerson Matsuuchi",
     owner: "tickle122",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953",
     review_img_url:
       "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
     review_body:
@@ -218,6 +254,8 @@ module.exports = [
     title: "Twister",
     designer: "Chuck Foley",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -230,6 +268,8 @@ module.exports = [
     title: "Monopoly",
     designer: "Uncredited",
     owner: "grumpy19",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
     review_img_url:
       "https://images.pexels.com/photos/1314435/pexels-photo-1314435.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -242,6 +282,8 @@ module.exports = [
     title: "Ganz Schon Clever",
     designer: "Wolfgang Warsch",
     owner: "happyamy2016",
+    owner_img_url:
+      "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
     review_img_url:
       "https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -254,6 +296,8 @@ module.exports = [
     title: "Yahtzee",
     designer: "Edwin S. Lowe",
     owner: "grumpy19",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/7/78/Mr-Grumpy-3A.PNG/revision/latest?cb=20170707233013",
     review_img_url:
       "https://images.pexels.com/photos/33968/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -266,6 +310,8 @@ module.exports = [
     title: "Escape The Dark Castle",
     designer: "Alex Crispin,",
     owner: "jessjelly",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
     review_img_url:
       "https://images.pexels.com/photos/2416463/pexels-photo-2416463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
@@ -278,6 +324,8 @@ module.exports = [
     title: "Escape The Dark Sector",
     designer: "Alex Crispin,",
     owner: "jessjelly",
+    owner_img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
     review_img_url:
       "https://images.pexels.com/photos/596132/pexels-photo-596132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     review_body:
