@@ -30,8 +30,7 @@ exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
       msg: "Order does not exist - use asc or desc",
     });
   }
-  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id ,
-  JOIN users WHERE owner = users.username`;
+  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id LEFT JOIN users on reviews.owner = users.username`;
 
   let queryVal = [];
   const validCategories = [
@@ -57,7 +56,7 @@ exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
       queryVal.push(category);
     }
   }
-  formatStr += ` GROUP BY reviews.review_id ORDER BY ${sort_by.toLowerCase()} ${order.toUpperCase()}`;
+  formatStr += `GROUP BY reviews.review_id ORDER BY ${sort_by.toLowerCase()} ${order.toUpperCase()}`;
 
   return db
     .query(formatStr, queryVal)
