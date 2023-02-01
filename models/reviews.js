@@ -30,7 +30,7 @@ exports.selectReviews = (category, sort_by = "created_at", order = "DESC") => {
       msg: "Order does not exist - use asc or desc",
     });
   }
-  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id  `;
+  let formatStr = `SELECT reviews. *, COUNT(comments) ::INT AS comment_count FROM reviews LEFT JOIN comments ON comments.review_id = reviews.review_id `;
 
   let queryVal = [];
   const validCategories = [
