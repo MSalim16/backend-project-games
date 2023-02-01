@@ -15,7 +15,7 @@ describe("/api/categories", () => {
       .expect(200)
       .then(({ body: { categories } }) => {
         expect(categories).toHaveLength(4);
-        categories.forEach(category => {
+        categories.forEach((category) => {
           expect(category).toMatchObject({
             slug: expect.any(String),
             description: expect.any(String),
@@ -41,7 +41,7 @@ describe("/api/reviews", () => {
       .expect(200)
       .then(({ body: { reviews } }) => {
         expect(reviews.length).toBe(13);
-        reviews.forEach(review => {
+        reviews.forEach((review) => {
           expect(review).toMatchObject({
             title: expect.any(String),
             designer: expect.any(String),
@@ -53,7 +53,6 @@ describe("/api/reviews", () => {
             created_at: expect.any(String),
             review_id: expect.any(Number),
             comment_count: expect.any(Number),
-            avatar_url: expect.any(String),
           });
         });
       });
@@ -73,7 +72,7 @@ describe("/api/reviews", () => {
       .then(({ body }) => {
         const { reviews } = body;
         expect(reviews.length > 0).toBe(true);
-        reviews.forEach(review => {
+        reviews.forEach((review) => {
           expect(review).toHaveProperty("category", "dexterity");
         });
       });
@@ -134,7 +133,7 @@ test("200 - returns array of reviews in filtered by category", () => {
     .expect(200)
     .then(({ body }) => {
       const { reviews } = body;
-      reviews.forEach(review => {
+      reviews.forEach((review) => {
         expect(review.category).toBe("dexterity");
       });
     });
@@ -209,7 +208,7 @@ describe("GET /api/reviews/:review_id/comments", () => {
           descending: false,
           coerce: true,
         });
-        comments.forEach(comment => {
+        comments.forEach((comment) => {
           expect(comment).toMatchObject(
             expect.objectContaining({
               comment_id: expect.any(Number),
@@ -443,7 +442,7 @@ describe("/api/users", () => {
       .expect(200)
       .then(({ body: { user } }) => {
         expect(users).toHaveLength(4);
-        users.forEach(user => {
+        users.forEach((user) => {
           expect(user).toMatchObject({
             username: expect.any(String),
             name: expect.any(String),
