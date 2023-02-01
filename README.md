@@ -2,7 +2,7 @@
 
 ## Link for Hosted Version of my API:
 
-https://mohamed-salims-games-api.onrender.com
+https://mohamed-salims-games-api.onrender.com/api
 
 ---
 
